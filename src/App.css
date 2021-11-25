@@ -37,6 +37,14 @@
   }
 }
 
+.compare-instruction {
+  font-size: small;
+}
+
+.detail-title {
+  font-weight: bold;
+}
+
 .dogs-container {
   margin: 24px;
 }

@@ -1,33 +1,15 @@
-import React, { Key, useState } from 'react';
-import logo from './logo.svg';
+import React, { Key } from 'react';
 import './App.css';
 import {
-  Provider, defaultTheme, Button, ActionButton, DialogTrigger, Dialog, Heading,
-  Divider, Content, ButtonGroup, Text, useListData, ListBox, Item, useAsyncList,
-  Picker, TableView, TableBody, TableHeader, Image, Row, Column, Cell, Flex, Header,
+  Provider, defaultTheme, ActionButton, DialogTrigger, Dialog, Heading,
+  useAsyncList, Button, ButtonGroup, Text,
+  TableView, TableBody, TableHeader, Image, Row, Column, Cell, Flex,
 } from '@adobe/react-spectrum';
 
-import {getUrlForNextPage} from './service';
+import { getUrlForNextPage } from './service';
 import { Breed } from './data';
 
-import CustomCell from './Custom_cell'
-import DogCard from './dog_card';
-
-interface RowData {
-  name: string;
-  height: string;
-  mass: string;
-  birthYear: string;
-}
-
-interface ColumnData {
-  name: string;
-  key: string;
-}
-
-
-
-
+import Compare from './compare';
 
 function App() {
 
@@ -41,7 +23,7 @@ function App() {
         signal
       });
 
-      page += 1;
+      page += 1
       let json = await res.json();
       return {
         items: json,
@@ -81,7 +63,15 @@ function App() {
 
   // Spent lots of time trying to resolve a compilation error. Need to add
   // <'all' | Iterable<Key>> to useState.
-  let [selectedKeys, setSelectedKeys] = React.useState<'all' | Iterable<Key>>(new Set([]));
+  let [selectedKeys, setSelectedKeys] = React.useState<'all' | Iterable<string>>(new Set([]));
+
+  function handleSelectedKeys(keys: 'all' | Iterable<Key>) {
+    if (keys === 'all') {
+      setSelectedKeys(new Set(list.items.map(item => item.name)))
+    } else {
+      setSelectedKeys(new Set((keys as Iterable<string>)));
+    }
+  }
 
   return (
     <Provider theme={defaultTheme}>
@@ -89,15 +79,35 @@ function App() {
         <Flex justifyContent="center"><Heading level={1}>Welcome to Dogs Home</Heading></Flex>
       </div>
       <div className="dogs-container">
-        <ActionButton alignSelf="start" 
-        isDisabled={selectedKeys != 'all' && (selectedKeys as Set<Key>).size <= 1}>
-          Compare
-          </ActionButton>
+        <DialogTrigger type="fullscreenTakeover">
+          {/* Disable the compare button if no entities are selected or too many (>=4) are selected */}
+          <Flex gap={"size-100"} alignItems={"center"} margin="size-200">
+            <ActionButton alignSelf="start"
+              isDisabled={selectedKeys !== 'all' && ((selectedKeys as Set<Key>).size <= 1
+                || (selectedKeys as Set<Key>).size >= 4)}>
+              Compare
+            </ActionButton>
+            {selectedKeys !== 'all' && ((selectedKeys as Set<Key>).size <= 1
+              || (selectedKeys as Set<Key>).size >= 4) ? <p className="compare-instruction">Select 2 - 3 Dogs to compare</p> : null}
+          </Flex>
+          {(close) => (
+            <Dialog>
+              <Compare items={selectedKeys === 'all' ? list.items : list.items.filter(item => (selectedKeys as Set<Key>).has(item.name))} />
+              <ButtonGroup>
+                <Button variant="cta" onPress={close} autoFocus>
+                  Done
+                </Button>
+              </ButtonGroup>
+            </Dialog>
+          )}
+        </DialogTrigger>
+
+
         <TableView aria-label="example async loading table" height="size-6000"
           overflowMode="wrap"
           selectionMode="multiple"
           selectedKeys={selectedKeys}
-          onSelectionChange={setSelectedKeys}>
+          onSelectionChange={handleSelectedKeys}>
           <TableHeader columns={columns}>
             {(column) => (
               <Column align={column.key !== 'name' ? 'end' : 'start'}>
