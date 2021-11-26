@@ -1,5 +1,5 @@
 
-import { Breed, exposedBreedAttributes, getValueFromItem, getValueWithDefault } from './data';
+import { Breed, BreedAttributes, exposedBreedAttributes, getDisplayNameForAttribute, getValueFromItem, getValueWithDefault } from './data';
 import {
     Flex, View, Text,
 } from '@adobe/react-spectrum';
@@ -26,13 +26,13 @@ function BreedDetail({ breed, shouldShowTitle }: BreedDetailProps) {
                 case 'image':
                     return (
                         <Flex columnGap="size-300" alignItems={"center"} height="size-8000">
-                            {shouldShowTitle ? <CustomTitle text={'Name'}></CustomTitle> : null}
+                            {shouldShowTitle ? <CustomTitle text={getDisplayNameForAttribute(BreedAttributes.dogName)}></CustomTitle> : null}
                             <DogCard item={breed}></DogCard>
                         </Flex>)
                 default:
                     return (
                         <Flex columnGap="size-300" alignItems={"center"} height="size-1000">
-                            {shouldShowTitle ? <CustomTitle text={attribute}></CustomTitle> : null}
+                            {shouldShowTitle ? <CustomTitle text={getDisplayNameForAttribute(attribute)}></CustomTitle> : null}
                             <View height="size-1000" width="size-3000">{getValueFromItem(breed, attribute)}</View>
                         </Flex>)
             }

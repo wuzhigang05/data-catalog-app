@@ -1,4 +1,4 @@
-import { Breed, exposedBreedAttributes, getValueFromItem } from './data'
+import { Breed, exposedBreedAttributes, getDisplayNameForAttribute, getValueFromItem } from './data'
 import {
     Flex, Image,
 } from '@adobe/react-spectrum';
@@ -30,7 +30,7 @@ function SingleDogRender({ item }: SingleDogRenderProp) {
                     default:
                         return <FixedWidthRow width="size-6000">
                             <Flex columnGap="size-200" alignItems="center">
-                                <FixedWidthRow width="size-2000"><h3>{attribute}</h3></FixedWidthRow>
+                                <FixedWidthRow width="size-2000"><h3>{getDisplayNameForAttribute(attribute)}</h3></FixedWidthRow>
                                 <FixedWidthRow width="size-6000">{getValueFromItem(item, attribute)}</FixedWidthRow>
                             </Flex>
                         </FixedWidthRow>

@@ -7,7 +7,7 @@ import {
 } from '@adobe/react-spectrum';
 
 import { getUrlForNextPage } from './service';
-import { Breed } from './data';
+import { Breed, ExposedColumnsInTable, exposedBreedAttributes } from './data';
 import SingleDogRender from './single_dog_render';
 import Compare from './compare';
 
@@ -32,17 +32,7 @@ function App() {
     }
   });
 
-  let columns = [
-    // { name: 'ID', key: 'id' },
-    // { name: 'Image', key: 'image' },
-    { name: 'Name', key: 'name' },
-    { name: 'Bred for', key: 'bred_for' },
-    { name: 'Breed group', key: 'breed_group' },
-    { name: 'Life span', key: 'life_span' },
-    { name: 'Temperament', key: 'temperament' },
-    { name: 'Origin', key: 'origin' },
-    // {name: 'Weight', key: 'weig'},
-  ];
+  let columns = ExposedColumnsInTable
 
   function getCell(item: Breed, field: keyof Breed) {
     switch (field) {
@@ -53,7 +43,7 @@ function App() {
               <Image src={item.image.url} alt={item.name} objectFit="cover" />
             </Flex>
             <DialogTrigger type="fullscreenTakeover">
-              <ActionButton alignSelf="start" width={"size-2000"}>
+              <ActionButton alignSelf="start" width={"size-3000"}>
                 <Heading level={5}>{item.name}</Heading>
               </ActionButton>
               {(close) => (
