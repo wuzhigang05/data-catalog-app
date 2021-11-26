@@ -30,6 +30,30 @@ export const exposedBreedAttributes = [
   'origin', 'weight', 'height'
 ]
 
+export function getValueFromItem(item: Breed, attribute: string) {
+  switch (attribute) {
+      case 'image':
+          return item.image.url
+      case 'weight':
+          return item.weight.metric
+      case 'height':
+          return item.height.metric
+      case 'name':
+          return item.name
+      case 'bred_for':
+          return item.bred_for
+      case 'breed_group':
+          return item.breed_group
+      case 'origin':
+          return item.origin
+      case 'temperament':
+          return item.temperament
+      case 'life_span':
+          return item.life_span
+      default:
+          return 'Not Available'
+  }
+}
 
 export function getValueWithDefault(value?: string | number) {
   return (value == null || value === '') ? 'Not Available' : value

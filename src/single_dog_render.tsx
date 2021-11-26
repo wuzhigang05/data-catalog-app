@@ -1,4 +1,4 @@
-import { Breed, exposedBreedAttributes } from './data'
+import { Breed, exposedBreedAttributes, getValueFromItem } from './data'
 import {
     Flex, Image,
 } from '@adobe/react-spectrum';
@@ -19,30 +19,6 @@ const FixedWidthRow: React.FunctionComponent<FixedWidthRowProps> = ({ width, chi
     )
 }
 
-function getValueFromItem(item: Breed, attribute: string) {
-    switch (attribute) {
-        case 'image':
-            return item.image.url
-        case 'weight':
-            return item.weight.metric
-        case 'height':
-            return item.height.metric
-        case 'name':
-            return item.name
-        case 'bred_for':
-            return item.bred_for
-        case 'breed_group':
-            return item.breed_group
-        case 'origin':
-            return item.origin
-        case 'temperament':
-            return item.temperament
-        case 'life_span':
-            return item.life_span
-        default:
-            return 'Not Available'
-    }
-}
 function SingleDogRender({ item }: SingleDogRenderProp) {
     return (
         <Flex margin="size-1000" margin-left="size-2000" direction="column" width="size-6000">
@@ -60,9 +36,6 @@ function SingleDogRender({ item }: SingleDogRenderProp) {
                         </FixedWidthRow>
                 }
             })}
-
-
-
         </Flex>
     )
 }
