@@ -2,13 +2,13 @@ import React, { Key } from 'react';
 import './App.css';
 import {
   Provider, defaultTheme, ActionButton, DialogTrigger, Dialog, Heading,
-  useAsyncList, Button, ButtonGroup, Text,
+  useAsyncList, Button, ButtonGroup,
   TableView, TableBody, TableHeader, Image, Row, Column, Cell, Flex,
 } from '@adobe/react-spectrum';
 
 import { getUrlForNextPage } from './service';
 import { Breed } from './data';
-
+import SingleDogRender from './single_dog_render';
 import Compare from './compare';
 
 function App() {
@@ -48,10 +48,26 @@ function App() {
     switch (field) {
       case "name":
         return <Cell>
-          <Flex columnGap="size-50">
+          <Flex columnGap="size-200">
             <Flex width="40px" height="40px">
               <Image src={item.image.url} alt={item.name} objectFit="cover" />
-            </Flex><Heading level={5}>{item.name}</Heading></Flex></Cell>;
+            </Flex>
+            <DialogTrigger type="fullscreenTakeover">
+              <ActionButton alignSelf="start" width={"size-2000"}>
+                <Heading level={5}>{item.name}</Heading>
+              </ActionButton>
+              {(close) => (
+                <Dialog>
+                  <SingleDogRender item={item} ></SingleDogRender>
+                  <ButtonGroup>
+                    <Button variant="cta" onPress={close} autoFocus>
+                      Done
+                    </Button>
+                  </ButtonGroup>
+                </Dialog>
+              )}
+            </DialogTrigger>
+          </Flex></Cell>;
       case "weight":
         return <Cell>{item.weight.metric}</Cell>;
       case "height":
@@ -82,7 +98,7 @@ function App() {
         <DialogTrigger type="fullscreenTakeover">
           {/* Disable the compare button if no entities are selected or too many (>=4) are selected */}
           <Flex gap={"size-100"} alignItems={"center"} margin="size-200">
-            <ActionButton alignSelf="start"
+            <ActionButton alignSelf="start" marginTop={"4px"}
               isDisabled={selectedKeys !== 'all' && ((selectedKeys as Set<Key>).size <= 1
                 || (selectedKeys as Set<Key>).size >= 4)}>
               Compare

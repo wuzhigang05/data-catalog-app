@@ -7,7 +7,7 @@ import BreedDetail from './breed_detail'
 interface CompareProps {
     items: Breed[];
 }
-
+ 
 
 function Compare({ items }: CompareProps) {
     return <Flex columnGap={"size-1000"} margin="size-500">

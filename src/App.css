@@ -24,6 +24,14 @@
   color: white;
 }
 
+img {
+  border-radius: 4px;
+}
+
+.compare-button {
+  margin-top: 4px;
+}
+
 .App-link {
   color: #61dafb;
 }

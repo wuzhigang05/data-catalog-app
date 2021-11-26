@@ -3,7 +3,12 @@ import {
     Image, Cell, Flex,
 } from '@adobe/react-spectrum';
 
-import { Breed, MyProps } from './data';
+import { Breed } from './data';
+
+type MyProps = {
+    field: string;
+    item: Breed;
+  }
 
 class CustomCell extends React.Component<MyProps>{
 

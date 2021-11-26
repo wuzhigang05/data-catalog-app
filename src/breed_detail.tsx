@@ -1,5 +1,5 @@
 
-import { Breed } from './data';
+import { Breed, getValueWithDefault } from './data';
 import {
     Flex, View, Text,
 } from '@adobe/react-spectrum';
@@ -40,39 +40,39 @@ function BreedDetail({ breed, shouldShowTitle }: BreedDetailProps) {
         </Flex>
         <Flex columnGap="size-500" alignItems={"center"} height="size-500">
             {shouldShowTitle ? <CustomTitle text={'Breed Group'}></CustomTitle> : null}
-            <View height={"size-400"}>{breed.breed_group}</View>
+            <View height={"size-400"}>{getValueWithDefault(breed.breed_group)}</View>
         </Flex>
         <Flex columnGap="size-500" alignItems={"start"} height="size-500">
             {shouldShowTitle ? <CustomTitle text={'Bred For'}></CustomTitle> : null}
-            <View height={"size-400"}>{breed.bred_for}</View>
+            <View height={"size-400"}>{getValueWithDefault(breed.bred_for)}</View>
         </Flex>
         <Flex columnGap="size-500" alignItems={"start"} height="size-500">
             {shouldShowTitle ? <CustomTitle text={'Life Span'}></CustomTitle> : null}
-            <View height={"size-400"}>{breed.life_span}</View>
+            <View height={"size-400"}>{getValueWithDefault(breed.life_span)}</View>
         </Flex>
         <Flex columnGap="size-500" alignItems={"center"} height="size-500">
             {shouldShowTitle ? <CustomTitle text={'Origin'}></CustomTitle> : null}
-            <View height={"size-400"}>{breed.origin}</View>
+            <View height={"size-400"}>{getValueWithDefault(breed.origin)}</View>
         </Flex>
         <Flex columnGap="size-500" alignItems={"start"} height="size-1000">
             {shouldShowTitle ? <CustomTitle text={'Temperament'}></CustomTitle> : null}
-            <View height={"size-400"} width={"size-3000"}>{breed.temperament}</View>
+            <View height={"size-400"} width={"size-3000"}>{getValueWithDefault(breed.temperament)}</View>
         </Flex>
         <Flex columnGap="size-500" alignItems={"start"}>
             {shouldShowTitle ? <CustomTitle text={'Weight (Metric)'}></CustomTitle> : null}
-            <View height={"size-400"}>{breed.weight.metric}</View>
+            <View height={"size-400"}>{getValueWithDefault(breed.weight.metric)}</View>
         </Flex>
         <Flex columnGap="size-500" alignItems={"start"}>
             {shouldShowTitle ? <CustomTitle text={'Weight (Imperial)'}></CustomTitle> : null}
-            <View height={"size-400"}>{breed.weight.imperial}</View>
+            <View height={"size-400"}>{getValueWithDefault(breed.weight.imperial)}</View>
         </Flex>
         <Flex columnGap="size-500" alignItems={"start"}>
             {shouldShowTitle ? <CustomTitle text={'Height (Metric)'}></CustomTitle> : null}
-            <View height={"size-400"}>{breed.height.metric}</View>
+            <View height={"size-400"}>{getValueWithDefault(breed.height.metric)}</View>
         </Flex>
         <Flex columnGap="size-500" alignItems={"start"}>
             {shouldShowTitle ? <CustomTitle text={'Height (Imperial)'}></CustomTitle> : null}
-            <View height={"size-400"}>{breed.height.imperial}</View>
+            <View height={"size-400"}>{getValueWithDefault(breed.height.imperial)}</View>
         </Flex>
     </Flex>
 }
