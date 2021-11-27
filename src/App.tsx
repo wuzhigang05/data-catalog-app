@@ -7,7 +7,7 @@ import {
 } from '@adobe/react-spectrum';
 
 import { getUrlForNextPage } from './service';
-import { Breed, BreedAttributes, getDisplayNameForAttribute } from './data';
+import { Breed, BreedAttributes, getDisplayNameForAttribute, getValueFromItem } from './data';
 import SingleDogRender from './single_dog_render';
 import Compare from './compare';
 
@@ -45,7 +45,7 @@ function App() {
 
   function getCell(item: Breed, field: keyof Breed) {
     switch (field) {
-      case "name":
+      case BreedAttributes.dogName:
         return <Cell>
           <Flex columnGap="size-200">
             <Flex width="40px" height="40px">
@@ -67,10 +67,13 @@ function App() {
               )}
             </DialogTrigger>
           </Flex></Cell>;
-      case "weight":
-        return <Cell>{item.weight.metric}</Cell>;
-      case "height":
-        return <Cell>{item.height.metric}</Cell>;
+      case BreedAttributes.weight:
+      case BreedAttributes.height:
+      case BreedAttributes.bred_for:
+      case BreedAttributes.breed_group:
+      case BreedAttributes.temperament:
+      case BreedAttributes.origin:
+        return <Cell>{getValueFromItem(item, field)}</Cell>;
       default:
         return <Cell>{item[field as keyof Breed]}</Cell>;
     }
@@ -146,3 +149,4 @@ function App() {
 }
 
 export default App;
+
