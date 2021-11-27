@@ -1,5 +1,5 @@
 
-import { Breed, BreedAttributes, exposedBreedAttributes, getDisplayNameForAttribute, getValueFromItem, getValueWithDefault } from './data';
+import { Breed, BreedAttributes, exposedBreedAttributes, getDisplayNameForAttribute, getValueFromItem} from './data';
 import {
     Flex, View, Text,
 } from '@adobe/react-spectrum';

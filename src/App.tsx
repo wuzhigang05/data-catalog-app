@@ -7,7 +7,7 @@ import {
 } from '@adobe/react-spectrum';
 
 import { getUrlForNextPage } from './service';
-import { Breed, ExposedColumnsInTable, exposedBreedAttributes } from './data';
+import { Breed, BreedAttributes, getDisplayNameForAttribute } from './data';
 import SingleDogRender from './single_dog_render';
 import Compare from './compare';
 
@@ -32,7 +32,16 @@ function App() {
     }
   });
 
-  let columns = ExposedColumnsInTable
+  let columns = [
+    BreedAttributes.dogName,
+    BreedAttributes.bred_for,
+    BreedAttributes.breed_group,
+    BreedAttributes.life_span,
+    BreedAttributes.temperament,
+    BreedAttributes.origin,
+  ].map((attribute) => {
+    return { name: getDisplayNameForAttribute(attribute), key: attribute }
+  })
 
   function getCell(item: Breed, field: keyof Breed) {
     switch (field) {
