@@ -25,10 +25,10 @@ function SingleDogRender({ item }: SingleDogRenderProp) {
             {exposedBreedAttributes.map((attribute) => {
                 switch (attribute) {
                     case 'image':
-                        return <FixedWidthRow width="size-6000"><Image src={item.image.url} alt={item.name} />
+                        return <FixedWidthRow key={attribute} width="size-6000"><Image src={item.image.url} alt={item.name} />
                         </FixedWidthRow>;
                     default:
-                        return <FixedWidthRow width="size-6000">
+                        return <FixedWidthRow key={attribute} width="size-6000">
                             <Flex columnGap="size-200" alignItems="center">
                                 <FixedWidthRow width="size-2000"><h3>{getDisplayNameForAttribute(attribute)}</h3></FixedWidthRow>
                                 <FixedWidthRow width="size-6000">{getValueFromItem(item, attribute)}</FixedWidthRow>
