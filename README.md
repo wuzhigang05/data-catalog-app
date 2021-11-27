@@ -1,6 +1,6 @@
 # Dog catalog app
 
-## An [app](https://nervous-brattain-cb0682.netlify.app) for you to view / compare all dog breeds.
+## An <a href="https://nervous-brattain-cb0682.netlify.app" target="_blank">app/a> for viewing / comparing all dog breeds.
 
 
 ## Frameworks
