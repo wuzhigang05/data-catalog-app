@@ -18,7 +18,7 @@ class DogCard extends React.Component<DogCardProps> {
                 <Image src={item.image.url} alt={item.name} objectFit="fill"></Image>
             </Flex>
             <Flex alignItems={'center'} columnGap='size-10'>
-                <View><Heading level={4} maxWidth="148px">{item.name}</Heading></View>
+                <View><Heading level={4}>{item.name}</Heading></View>
             </Flex>
         </Flex>;
     }
