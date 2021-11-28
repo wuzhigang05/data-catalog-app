@@ -2,15 +2,15 @@ import React, { Key } from 'react';
 import './App.css';
 import {
   Provider, defaultTheme, ActionButton, DialogTrigger, Dialog, Heading,
-  useAsyncList, Button, ButtonGroup,
+  useAsyncList, Button, ButtonGroup, Text,
   TableView, TableBody, TableHeader, Image, Row, Column, Cell, Flex,
 } from '@adobe/react-spectrum';
 
 import { getUrlForNextPage } from './service';
 import { Breed, BreedAttributes, getDisplayNameForAttribute, getValueFromItem } from './data';
 import SingleDogRender from './single_dog_render';
-import Compare from './compare';
-
+import CompareFC from './compare';
+import Compare from '@spectrum-icons/workflow/Compare';
 let compare_minimum_threshold: number = 2
 let compare_maximum_threshold: number = 3
 let page: number = 0;
@@ -107,7 +107,8 @@ function App() {
               isDisabled={selectedKeys === 'all' ||
                 ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
                 ((selectedKeys as Set<Key>).size > compare_maximum_threshold)}>
-              Compare
+                  <Compare />
+              <Text>Compare </Text>
             </ActionButton>
 
             {selectedKeys === 'all' ||
@@ -118,7 +119,7 @@ function App() {
           </Flex>
           {(close) => (
             <Dialog>
-              <Compare items={selectedKeys === 'all' ?
+              <CompareFC items={selectedKeys === 'all' ?
                 list.items :
                 list.items.filter(item => (selectedKeys as Set<Key>).has(item.name))} />
               <ButtonGroup>

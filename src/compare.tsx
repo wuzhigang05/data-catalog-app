@@ -9,10 +9,10 @@ interface CompareProps {
 }
 
 
-function Compare({ items }: CompareProps) {
+function CompareFC({ items }: CompareProps) {
     return <Flex columnGap={"size-1000"} margin="size-500">
         {items.map((item, index) =>
             <BreedDetail breed={item} key={item.name} shouldShowTitle={index === 0}></BreedDetail>)}
     </Flex>
 }
-export default Compare;
+export default CompareFC;
