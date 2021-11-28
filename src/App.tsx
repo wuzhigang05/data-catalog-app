@@ -121,7 +121,7 @@ function App() {
         </DialogTrigger>
 
 
-        <TableView aria-label="example async loading table" height="size-6000"
+        <TableView aria-label="example async loading table" height="1080px"
           overflowMode="wrap"
           selectionMode="multiple"
           selectedKeys={selectedKeys}
