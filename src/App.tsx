@@ -10,6 +10,9 @@ import { getUrlForNextPage } from './service';
 import { Breed, BreedAttributes, getDisplayNameForAttribute, getValueFromItem } from './data';
 import SingleDogRender from './single_dog_render';
 import Compare from './compare';
+
+let compare_minimum_threshold: number = 2
+let compare_maximum_threshold: number = 3
 let page: number = 0;
 
 function App() {
@@ -101,16 +104,22 @@ function App() {
           {/* Disable the compare button if no entities are selected or too many (>=4) are selected */}
           <Flex gap={"size-100"} alignItems={"center"} margin="size-200">
             <ActionButton alignSelf="start" marginTop={"4px"}
-              isDisabled={selectedKeys !== 'all' && ((selectedKeys as Set<Key>).size <= 1
-                || (selectedKeys as Set<Key>).size >= 4)}>
+              isDisabled={selectedKeys === 'all' ||
+                ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
+                ((selectedKeys as Set<Key>).size > compare_maximum_threshold)}>
               Compare
             </ActionButton>
-            {selectedKeys !== 'all' && ((selectedKeys as Set<Key>).size <= 1
-              || (selectedKeys as Set<Key>).size >= 4) ? <p className="compare-instruction">Select 2 - 3 Dogs to compare</p> : null}
+            {selectedKeys === 'all' ||
+              ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
+              ((selectedKeys as Set<Key>).size > compare_maximum_threshold) ?
+              <p className="compare-instruction">Select {compare_minimum_threshold} - {compare_maximum_threshold} Dogs to compare</p> :
+              null}
           </Flex>
           {(close) => (
             <Dialog>
-              <Compare items={selectedKeys === 'all' ? list.items : list.items.filter(item => (selectedKeys as Set<Key>).has(item.name))} />
+              <Compare items={selectedKeys === 'all' ?
+                list.items :
+                list.items.filter(item => (selectedKeys as Set<Key>).has(item.name))} />
               <ButtonGroup>
                 <Button variant="cta" onPress={close} autoFocus>
                   Done
