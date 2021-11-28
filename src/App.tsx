@@ -2,7 +2,7 @@ import React, { Key } from 'react';
 import './App.css';
 import {
   Provider, defaultTheme, ActionButton, DialogTrigger, Dialog, Heading,
-  useAsyncList, Button, ButtonGroup,
+  useAsyncList, Button, ButtonGroup, View,
   TableView, TableBody, TableHeader, Image, Row, Column, Cell, Flex,
 } from '@adobe/react-spectrum';
 
@@ -50,7 +50,7 @@ function App() {
     switch (field) {
       case BreedAttributes.dogName:
         return <Cell>
-          <Flex columnGap="size-200">
+          <Flex columnGap="size-200" alignItems="center">
             <Flex width="40px" height="40px">
               <Image src={item.image.url} alt={item.name} objectFit="cover" />
             </Flex>
@@ -69,7 +69,7 @@ function App() {
                 </Dialog>
               )}
             </DialogTrigger>
-          </Flex></Cell>;
+          </Flex></Cell >;
       case BreedAttributes.weight:
       case BreedAttributes.height:
       case BreedAttributes.bred_for:
@@ -103,12 +103,13 @@ function App() {
         <DialogTrigger type="fullscreenTakeover">
           {/* Disable the compare button if no entities are selected or too many (>=4) are selected */}
           <Flex gap={"size-100"} alignItems={"center"} margin="size-200">
-            <ActionButton alignSelf="start" marginTop={"4px"}
+            <ActionButton alignSelf="start" marginTop={"4px"} staticColor="white"
               isDisabled={selectedKeys === 'all' ||
                 ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
                 ((selectedKeys as Set<Key>).size > compare_maximum_threshold)}>
               Compare
             </ActionButton>
+
             {selectedKeys === 'all' ||
               ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
               ((selectedKeys as Set<Key>).size > compare_maximum_threshold) ?
