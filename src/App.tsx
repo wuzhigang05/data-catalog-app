@@ -2,7 +2,7 @@ import React, { Key } from 'react';
 import './App.css';
 import {
   Provider, defaultTheme, ActionButton, DialogTrigger, Dialog, Heading,
-  useAsyncList, Button, ButtonGroup, View,
+  useAsyncList, Button, ButtonGroup,
   TableView, TableBody, TableHeader, Image, Row, Column, Cell, Flex,
 } from '@adobe/react-spectrum';
 
