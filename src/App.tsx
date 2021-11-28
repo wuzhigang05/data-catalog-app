@@ -10,10 +10,10 @@ import { getUrlForNextPage } from './service';
 import { Breed, BreedAttributes, getDisplayNameForAttribute, getValueFromItem } from './data';
 import SingleDogRender from './single_dog_render';
 import Compare from './compare';
+let page: number = 0;
 
 function App() {
 
-  let page: number = 0;
   let list = useAsyncList<Breed>({
     async load({ signal, cursor }) {
       // If no cursor is available, then we're loading the first page.
@@ -27,7 +27,7 @@ function App() {
       let json = await res.json();
       return {
         items: json,
-        cursor: getUrlForNextPage(page).toString()
+        cursor: getUrlForNextPage(page).toString(),
       };
     }
   });
