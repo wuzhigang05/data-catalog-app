@@ -74,11 +74,12 @@ function App() {
       case BreedAttributes.height:
       case BreedAttributes.bred_for:
       case BreedAttributes.breed_group:
+      case BreedAttributes.life_span:
       case BreedAttributes.temperament:
       case BreedAttributes.origin:
         return <Cell>{getValueFromItem(item, field)}</Cell>;
       default:
-        return <Cell>{item[field as keyof Breed]}</Cell>;
+        throw Error("Unhandled attribute: " + {field});
     }
   }
 
