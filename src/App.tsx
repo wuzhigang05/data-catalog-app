@@ -2,7 +2,7 @@ import React, { Key } from 'react';
 import './App.css';
 import {
   Provider, defaultTheme, ActionButton, DialogTrigger, Dialog, Heading,
-  useAsyncList, Button, ButtonGroup, Text,
+  useAsyncList, Button, ButtonGroup,
   TableView, TableBody, TableHeader, Image, Row, Column, Cell, Flex,
 } from '@adobe/react-spectrum';
 
@@ -10,7 +10,6 @@ import { getUrlForNextPage } from './service';
 import { Breed, BreedAttributes, getDisplayNameForAttribute, getValueFromItem } from './data';
 import SingleDogRender from './single_dog_render';
 import CompareFC from './compare';
-import Compare from '@spectrum-icons/workflow/Compare';
 let compare_minimum_threshold: number = 2
 let compare_maximum_threshold: number = 3
 let page: number = 0;
@@ -79,7 +78,7 @@ function App() {
       case BreedAttributes.origin:
         return <Cell>{getValueFromItem(item, field)}</Cell>;
       default:
-        throw Error("Unhandled attribute: " + {field});
+        throw Error("Unhandled attribute: " + { field });
     }
   }
 
@@ -104,13 +103,10 @@ function App() {
         <DialogTrigger type="fullscreenTakeover">
           {/* Disable the compare button if no entities are selected or too many (>=4) are selected */}
           <Flex gap={"size-100"} alignItems={"center"} margin="size-200">
-            <ActionButton alignSelf="start" marginTop={"4px"} staticColor="white"
+            <Button variant="cta" alignSelf="start" marginTop={"4px"}
               isDisabled={selectedKeys === 'all' ||
                 ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
-                ((selectedKeys as Set<Key>).size > compare_maximum_threshold)}>
-                  <Compare />
-              <Text>Compare </Text>
-            </ActionButton>
+                ((selectedKeys as Set<Key>).size > compare_maximum_threshold)}>Compare</Button>
 
             {selectedKeys === 'all' ||
               ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
