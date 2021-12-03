@@ -104,13 +104,17 @@ function App() {
         <DialogTrigger type="fullscreenTakeover">
           {/* Disable the compare button if no entities are selected or too many (>=4) are selected */}
           <Flex gap={"size-100"} alignItems={"center"} margin="size-200">
-            <ActionButton alignSelf="start" marginTop={"4px"} staticColor="white"
+            {/* <ActionButton alignSelf="start" marginTop={"4px"} staticColor="white"
               isDisabled={selectedKeys === 'all' ||
                 ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
                 ((selectedKeys as Set<Key>).size > compare_maximum_threshold)}>
                   <Compare />
               <Text>Compare </Text>
-            </ActionButton>
+            </ActionButton> */}
+            <Button variant="cta" alignSelf="start" marginTop={"4px"} 
+            isDisabled={selectedKeys === 'all' ||
+            ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
+            ((selectedKeys as Set<Key>).size > compare_maximum_threshold)}>Compare</Button>
 
             {selectedKeys === 'all' ||
               ((selectedKeys as Set<Key>).size < compare_minimum_threshold) ||
